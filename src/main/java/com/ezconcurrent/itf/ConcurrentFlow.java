@@ -1,7 +1,6 @@
-package com.ezconcurrent;
+package com.ezconcurrent.itf;
 
 import java.util.concurrent.Callable;
-import java.util.function.Predicate;
 
 /**
  * Created by sancheng on 11/24/2017.
