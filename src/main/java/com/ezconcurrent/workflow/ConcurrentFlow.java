@@ -1,6 +1,7 @@
-package com.ezconcurrent.itf;
+package com.ezconcurrent.workflow;
 
 import java.util.concurrent.Callable;
+import java.util.function.Consumer;
 
 /**
  * Created by sancheng on 11/24/2017.
@@ -24,17 +25,20 @@ public interface ConcurrentFlow<T> {
 
     public ConcurrentFlow minmumSucceed(int number);
 
-    /*
-    wait and procceed
-     */
-    public T converge();
-
-    public ConcurrentFlow logFailure();
-
     public ConcurrentFlow finishCallback(Callable call);
 
     public ConcurrentFlow failureCallback(Callable call);
 
     public ConcurrentFlow pipe();
+
+    public ConcurrentFlow next(Callable call);
+
+    public ConcurrentFlow next(Consumer consumer);
+
+    public ConcurrentFlow split(Callable... calls);
+
+    public T start();
+
+
 
 }

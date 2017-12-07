@@ -4,30 +4,28 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 /**
  * Created by sancheng on 9/28/2017.
  *
- * A Task Tree which parent task waits for all children task completes before it starts its own mission.
+ * A JoinableTask Tree which waits for all children task completes before it starts its own mission.
  * All child tasks executed concurrently.
  */
-public class Task {
+public class JoinableTask {
 
     private final List<Runnable> preTasks = new LinkedList<>();
     private Runnable runnable = null;
 
-    public Task join(Task subTask)  {
-        preTasks.add(()->subTask.exec());
+    public JoinableTask join(JoinableTask subJoinableTask)  {
+        preTasks.add(()-> subJoinableTask.exec());
         return this;
     }
 
-    public Task(Runnable r) {
+    public JoinableTask(Runnable r) {
         this.runnable = r;
     }
 
-    public Task() {
+    public JoinableTask() {
 
     }
 
